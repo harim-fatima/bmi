@@ -10,8 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,31 +42,33 @@ fun Bmi(modifier: Modifier = Modifier) {
     val bmi = if (weight > 0 && height > 0) formatter.format(weight / (height * height)) else 0.0f
 
     Column {
-        Text(
+        Text (
             text = "Body mass index",
             fontSize = 24.sp,
             color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center,
             modifier = modifier.fillMaxWidth().padding(vertical = 16.dp)
         )
         OutlinedTextField(
             value = heightInput,
-            onValueChange = { heightInput = it.replace(',', '.') },
-            label = { Text("Height") },
+            onValueChange = {heightInput = it.replace(',','.')},
+            label = {Text("Height")},
             singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp)
         )
         OutlinedTextField(
             value = weightInput,
-            onValueChange = { weightInput = it.replace(',', '.') },
-            label = { Text("Weight") },
+            onValueChange = {weightInput = it.replace(',','.')},
+            label = {Text("Weight")},
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth().padding(start = 8.dp, end = 8.dp)
         )
         Text(
-            text = "Body mass index is $bmi",
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, top = 16.dp)
+            text = "Body mass index is " + bmi,
+            modifier = Modifier.fillMaxWidth().padding(start = 16.dp,top = 16.dp)
         )
     }
 }
